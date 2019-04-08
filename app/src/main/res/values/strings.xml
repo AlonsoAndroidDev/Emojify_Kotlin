@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Emojify_kotlin</string>
+    <string name="error">Error finding image</string>
+    <string name="saved_message">Image Saved at %1$s</string>
+</resources>
