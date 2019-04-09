@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "874425404980",
+    "firebase_url": "https://emojify-710f2.firebaseio.com",
+    "project_id": "emojify-710f2",
+    "storage_bucket": "emojify-710f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874425404980:android:161d1e7c1778423c",
+        "android_client_info": {
+          "package_name": "com.example.emojify_kotlin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaBwu_JSSIwzzM42RI5YWrR_ltad-2DL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874425404980-32blq1tn6u9cgt5jcb2mlbb415bfkg9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
