@@ -84,7 +84,7 @@ class Emojifier{
         return emoji
     }
 
-    fun addBitmapToFace(backgroundBitmap: Bitmap, emojiBitmap: Bitmap, face: Face): Bitmap {
+    private fun addBitmapToFace(backgroundBitmap: Bitmap, emojiBitmap: Bitmap, face: Face): Bitmap {
         var emojiBitmap = emojiBitmap
 
         val resultBitmap = Bitmap.createBitmap(
