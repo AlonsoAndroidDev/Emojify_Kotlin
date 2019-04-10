@@ -15,7 +15,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BitmapUtils {
+object BitmapUtils {
 
     val FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider"
 

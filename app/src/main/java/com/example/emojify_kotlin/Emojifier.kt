@@ -38,7 +38,22 @@ class Emojifier{
                 var emojiBitmap: Bitmap? = null
 
                 when(whichEmoji(face)){
-                    Emoji.SMILE -> emojiBitmap = BitmapFactory.decodeResource(context.resources,R.drawable.smile)
+                    Emoji.SMILE ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources,R.drawable.smile)
+                    Emoji.FROWN ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.frown)
+                    Emoji.CLOSED_EYE_FROWN ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.closed_frown)
+                    Emoji.CLOSED_EYE_SMILE ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.closed_smile)
+                    Emoji.LEFT_WINK ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.leftwink)
+                    Emoji.LEFT_WINK_FROWN ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.leftwinkfrown)
+                    Emoji.RIGHT_WINK ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.rightwink)
+                    Emoji.RIGHT_WINK_FROWN ->
+                        emojiBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.rightwinkfrown)
                 }
 
                 resultBitmap = addBitmapToFace(resultBitmap, emojiBitmap!!, face)
