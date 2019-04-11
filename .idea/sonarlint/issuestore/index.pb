@@ -62,3 +62,7 @@ P
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 Y
 )app/src/main/res/layout/activity_main.xml,7/6/76b07e40f24cce093536731477540f12e7da3cb6
+R
+"app/src/main/res/values/dimens.xml,c/3/c3c1811dec2dbad2deeafb9aad505ca9631da740
+S
+#app/src/main/res/xml/file_paths.xml,e/7/e7f007fbc01059fd98da2893455aa52c5c160c9b

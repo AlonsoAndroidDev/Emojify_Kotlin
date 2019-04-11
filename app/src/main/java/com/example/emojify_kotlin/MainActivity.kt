@@ -21,11 +21,10 @@ class MainActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_STORAGE_PERMISSION = 1
-    private lateinit var context : Context
-    private lateinit var mResultsBitmap : Bitmap
-    private var mTempPhotoPath = ""
-
     private val FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider"
+    private lateinit var context: Context
+    private lateinit var mResultsBitmap: Bitmap
+    private var mTempPhotoPath = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,45 +32,64 @@ class MainActivity : AppCompatActivity() {
 
         context = applicationContext
 
-        events()
+        buttonEvents()
     }
 
-    fun events(){
-        emojifyMe()
-    }
+    private fun buttonEvents() {
+        emojify_button?.setOnClickListener {
+            emojifyMe()
+        }
 
-    fun emojifyMe(){
-        emojify_button.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(this,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,
-                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_STORAGE_PERMISSION)
-            }else{
-                launchCamera()
-            }
+        save_button?.setOnClickListener {
+            saveMe()
+        }
+
+        share_button?.setOnClickListener {
+            shareMe()
+        }
+
+        clear_button?.setOnClickListener {
+            clearImage()
         }
     }
 
-    private fun launchCamera(){
+    private fun emojifyMe() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_STORAGE_PERMISSION
+            )
+        } else {
+            launchCamera()
+        }
+    }
+
+    private fun launchCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        if(takePictureIntent.resolveActivity(packageManager) != null){
-            var photoFile : File? = null
+        if (takePictureIntent.resolveActivity(packageManager) != null) {
+            var photoFile: File? = null
 
             try {
                 photoFile = BitmapUtils.createTempImageFile(context)
-            }catch (e: IOException){
+            } catch (e: IOException) {
                 e.printStackTrace()
             }
 
-            if(photoFile != null){
+            if (photoFile != null) {
                 mTempPhotoPath = photoFile.absolutePath
 
-                var photoUri = FileProvider.getUriForFile(context,
+                var photoUri = FileProvider.getUriForFile(
+                    context,
                     FILE_PROVIDER_AUTHORITY,
-                    photoFile)
+                    photoFile
+                )
 
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
 
@@ -81,21 +99,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             processAndSetImage()
-        }else{
-            BitmapUtils.deleteImageFile(context,mTempPhotoPath)
+        } else {
+            BitmapUtils.deleteImageFile(context, mTempPhotoPath)
         }
     }
 
-    private fun processAndSetImage(){
-        emojify_button.visibility = View.GONE
-        title_text_view.visibility = View.GONE
-        clear_button.show()
-        save_button.show()
-        share_button.show()
+    private fun processAndSetImage() {
+        emojify_button?.visibility = View.GONE
+        title_text_view?.visibility = View.GONE
+        clear_button?.show()
+        save_button?.show()
+        share_button?.show()
 
         mResultsBitmap = BitmapUtils.resamplePic(context, mTempPhotoPath)
         image_view.setImageBitmap(mResultsBitmap)
+    }
+
+    private fun saveMe() {
+        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
+        BitmapUtils.saveImage(this, mResultsBitmap)
+    }
+
+    private fun shareMe() {
+        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
+        BitmapUtils.saveImage(this, mResultsBitmap)
+        BitmapUtils.shareImage(this, mTempPhotoPath)
+    }
+
+    private fun clearImage() {
+        image_view?.setImageResource(0)
+        emojify_button?.visibility = View.VISIBLE
+        title_text_view?.visibility = View.VISIBLE
+        share_button?.hide()
+        save_button?.hide()
+        clear_button?.hide()
+
+        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
     }
 }
